@@ -1,5 +1,5 @@
 import express from 'express';
-import { getAllDucks, addDucks, editDuck, deleteDuck, deleteDuckListing } from '../controllers/duckController.js';
+import { getAllDucks, addDucks, editDuck, deleteDuck, deleteDuckListing } from '../controllers/warehouseController.js';
 
 const router = express.Router();
 

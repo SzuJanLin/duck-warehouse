@@ -41,7 +41,7 @@ export const editDuck = async (req, res) => {
     
       if (existingDuck) {
         existingDuck.price = price;
-        existingDuck.quantity += quantity;
+        existingDuck.quantity = quantity;
         await existingDuck.save();
         
         res.status(200).json({ message: 'Duck price and quantity updated', duck: existingDuck });
