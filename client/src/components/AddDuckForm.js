@@ -44,8 +44,6 @@ const AddDuckForm = ({ onAddDuck, onEditDuck, initialDuck }) => {
 
   return (
     <Form onSubmit={handleSubmit}>
-      <h3>{initialDuck ? 'Edit Duck' : 'Add Duck'}</h3>
-
       <Form.Group as={Row} className="mb-3" controlId="formColor">
         <Form.Label column sm="3">Color</Form.Label>
         <Col sm="9">

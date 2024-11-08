@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Modal, Button, Table, Container, Row, Col, Spinner, Alert } from 'react-bootstrap';
 import AddDuckForm from '../components/AddDuckForm';
-import { fetchDucks, addOrUpdateDuck, editDuck, deleteDuckListing } from '../services/duckService';
+import { fetchDucks, addOrUpdateDuck, editDuck, deleteDuckListing } from '../services/warehouseService';
 
 const Dashboard = () => {
   const [ducks, setDucks] = useState([]);
@@ -103,7 +103,7 @@ const Dashboard = () => {
 
       {loading && <Spinner animation="border" variant="primary" />}
       {error && <Alert variant="danger">{error}</Alert>}
-      
+
       <Row>
         <Col>
           <Table striped bordered hover>
