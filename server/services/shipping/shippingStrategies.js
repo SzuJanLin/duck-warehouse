@@ -15,7 +15,7 @@ class AirShippingStrategy {
 
 class LandShippingStrategy {
     applyFill(packageMaterial) {
-        packageMaterial.setFill(FillMaterials.POLYSTYRENE_BALLS);
+        packageMaterial.setFill([FillMaterials.POLYSTYRENE_BALLS]);
     }
 }
 
