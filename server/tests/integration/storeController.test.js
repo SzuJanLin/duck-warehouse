@@ -251,7 +251,7 @@ describe('POST /api/store/order', () => {
             size: 'Large',
             quantity: 100,
             destinationCountry: 'USA',
-            shippingMode: 'Air', 
+            shippingMode: 'Sea', 
         };
 
         it('should add 5% surcharge for wood package', async () => {
@@ -261,7 +261,10 @@ describe('POST /api/store/order', () => {
 
             const baseCost = 100 * 10; 
             const woodSurcharge = baseCost * 0.05; 
-            const expectedTotal = baseCost + woodSurcharge;
+            let expectedTotal = baseCost + woodSurcharge;
+            expectedTotal *= 1.18;
+            expectedTotal += 400;
+
 
             expect(response.status).toBe(200);
             expect(response.body.details.package_type).toBe("Wood");
@@ -269,20 +272,17 @@ describe('POST /api/store/order', () => {
         });
 
         it('should add 10% surcharge for plastic package', async () => {
-            const plasticDuck = await Duck.create({
-                color: 'Green',
-                size: 'Small',
-                price: 10,
-                quantity: 2000,
-            });
 
             const response = await request(app)
                 .post('/api/store/order')
-                .send({ ...baseOrder, color: 'Green', size: 'Small' });
+                .send({ ...baseOrder, size: 'Small' });
 
             const baseCost = 100 * 10; 
             const plasticSurcharge = baseCost * 0.1; 
-            const expectedTotal = baseCost + plasticSurcharge;
+            let expectedTotal = baseCost + plasticSurcharge;
+            expectedTotal *= 1.18;
+            expectedTotal += 400;
+
 
             expect(response.status).toBe(200);
             expect(response.body.details.package_type).toBe("Plastic");
@@ -290,20 +290,16 @@ describe('POST /api/store/order', () => {
         });
 
         it('should apply 1% discount for cardboard package', async () => {
-            const cardboardDuck = await Duck.create({
-                color: 'Blue',
-                size: 'Medium', 
-                price: 10,
-                quantity: 2000,
-            });
 
             const response = await request(app)
                 .post('/api/store/order')
-                .send({ ...baseOrder, color: 'Blue', size: 'Medium' });
+                .send({ ...baseOrder, size: 'Medium' });
 
             const baseCost = 100 * 10; 
             const cardboardDiscount = baseCost * 0.01;
-            const expectedTotal = baseCost - cardboardDiscount;
+            let expectedTotal = baseCost - cardboardDiscount;
+            expectedTotal *= 1.18;
+            expectedTotal += 400;  
 
             expect(response.status).toBe(200);
             expect(response.body.details.package_type).toBe("Cardboard");
